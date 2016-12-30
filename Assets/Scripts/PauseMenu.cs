@@ -13,13 +13,15 @@ namespace ExplorTheCampus {
         {
             GameManager.instance.ShowControl(false);
             scoreText.text = GameManager.instance.Credits 
-                + "\n" + GameManager.instance.Semester 
+                + "\n" + GameManager.instance.Semester + "/" + GameManager.instance.maxAmountSemester
                 + "\n" + GameManager.instance.Attempts;
+            GameManager.instance.AllowPlayerMovement(false);
         }
 
         void OnDisable()
         {
             GameManager.instance.ShowControl(true);
+            GameManager.instance.AllowPlayerMovement(true);
         }
     }
 

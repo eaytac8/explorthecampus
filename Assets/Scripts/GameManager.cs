@@ -19,6 +19,7 @@ namespace ExplorTheCampus {
         public GameObject canvas;
         public GameObject control;
         public PlayerController playerController;
+        public int maxAmountSemester = 7;
 
         [Tooltip("The maximum amount of modules which could be repeated in the whole game --> 2 in Reutlingen University")]
         public int maxRetriesModules = 2;
@@ -26,13 +27,13 @@ namespace ExplorTheCampus {
         public int maxRetriesPerModule = 3;
         [Tooltip("The amount of modules per semester. The element index+1 corresponds to the semester. Element 0 would be Semester 1")]
         public int[] amountModulesPerSemester = new int[7];
-
+ 
         private int amountMinigames;
         private GameDataContainer gameData;
         private Dictionary<string, int> semesterModuleMapping;
         private Vector3 lastPlayerPosition;
         private float[] lastPlayerDirection;
-
+        private int maxCredits;
         /// <summary>
         /// The gamedata which should be persisted.
         /// This inner class should never ever contain any methods!
@@ -151,6 +152,18 @@ namespace ExplorTheCampus {
             }
         }
 
+        public int MaxCredits
+        {
+            get
+            {
+                return maxCredits;
+            }
+            set
+            {
+                maxCredits = value;
+            }
+        }
+
         public float Attempts
         {
             get
@@ -230,9 +243,7 @@ namespace ExplorTheCampus {
             
             if (CnInputManager.GetButtonUp("Fire2"))
             {
-                SaveGameData();
                 PauseGame(true);
-                AllowPlayerMovement(false);
             }
             
         }
@@ -247,7 +258,7 @@ namespace ExplorTheCampus {
             ((PlayerController) GameObject.Find("Player").GetComponent("PlayerController")).AllowedToMove = allow;    
         }
 
-        private void PauseGame(bool pause)
+        public void PauseGame(bool pause)
         {
             canvas.SetActive(pause);
         }
@@ -302,6 +313,11 @@ namespace ExplorTheCampus {
         public void ResetGame()
         {
 
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
     }
 }

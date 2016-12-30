@@ -15,6 +15,7 @@ namespace ExplorTheCampus
         void Start()
         {
             this.id = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+            GameManager.instance.MaxCredits += credits;
         }
 
         public float Mark
@@ -57,6 +58,11 @@ namespace ExplorTheCampus
             {
                 score = credits;
             }
+        }
+
+        void OnValidate()
+        {
+            Debug.Log("VKDMOWEC");
         }
     }
 }
