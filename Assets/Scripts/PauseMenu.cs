@@ -8,12 +8,18 @@ namespace ExplorTheCampus {
     {
 
         public Text scoreText;
-        public Text semesterTex;
-        public Text attemtsText;
 
         void OnEnable()
         {
-            //scoreText.text = GameManager.instance.gameData.creditsValue + "";
+            GameManager.instance.ShowControl(false);
+            scoreText.text = GameManager.instance.Credits 
+                + "\n" + GameManager.instance.Semester 
+                + "\n" + GameManager.instance.Attempts;
+        }
+
+        void OnDisable()
+        {
+            GameManager.instance.ShowControl(true);
         }
     }
 

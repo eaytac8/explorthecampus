@@ -17,6 +17,7 @@ namespace ExplorTheCampus {
 
         public static GameManager instance = null;
         public GameObject canvas;
+        public GameObject control;
         public PlayerController playerController;
 
         [Tooltip("The maximum amount of modules which could be repeated in the whole game --> 2 in Reutlingen University")]
@@ -129,6 +130,7 @@ namespace ExplorTheCampus {
             }
             int gameId = moduelIdsNotPlayed[Random.Range(0, moduelIdsNotPlayed.Count)];
             AllowPlayerMovement(false);
+            ShowControl(false);
             GameObject player = GameObject.Find("Player");
             Transform playerTransform = player.GetComponent<Transform>();
             Animator playerAnimator = player.GetComponent<Animator>();
@@ -141,11 +143,27 @@ namespace ExplorTheCampus {
         /// <summary>
         /// Return the current level of the player.
         /// </summary>
-        public int CurrentSemester
+        public int Semester
         {
             get
             {
                 return gameData.semester;
+            }
+        }
+
+        public float Attempts
+        {
+            get
+            {
+                return gameData.attempts;
+            }
+        }
+
+        public float Credits
+        {
+            get
+            {
+                return gameData.credits;
             }
         }
 
@@ -232,6 +250,14 @@ namespace ExplorTheCampus {
         private void PauseGame(bool pause)
         {
             canvas.SetActive(pause);
+        }
+
+        public void ShowControl(bool enable)
+        {
+            if (control)
+            {
+                control.SetActive(enable);
+            }
         }
 
         /// <summary>

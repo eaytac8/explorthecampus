@@ -53,6 +53,7 @@ namespace ExplorTheCampus
             else
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Campus");
+                GameManager.instance.ShowControl(true);
             }
         }
 
