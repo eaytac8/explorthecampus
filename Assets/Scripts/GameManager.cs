@@ -141,6 +141,11 @@ namespace ExplorTheCampus {
             StartCoroutine(SceneManager.instance.LoadScene(gameId));
         }
         
+        public void StartGame()
+        {
+            StartCoroutine(SceneManager.instance.LoadScene(1));
+        }
+
         /// <summary>
         /// Return the current level of the player.
         /// </summary>

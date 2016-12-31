@@ -21,8 +21,10 @@ namespace ExplorTheCampus
             playerTransform.position = GameManager.instance.PersistedPlayerPosition;
             playerAnimator.SetFloat("input_x", GameManager.instance.PersistedPlayerDirection[0]);
             playerAnimator.SetFloat("input_y", GameManager.instance.PersistedPlayerDirection[1]);
-            
-            if (SceneManager.instance.lastScene != null && SceneManager.instance.lastScene != "" && SceneManager.instance.lastScene != "Campus")
+            if (SceneManager.instance.lastScene != null 
+                && SceneManager.instance.lastScene != "" 
+                && SceneManager.instance.lastScene != "Campus" 
+                && SceneManager.instance.lastScene != "Start")
             {
                 Vector3 lastPlayerPosition = GameManager.instance.LastPlayerPosition;
                 float[] lastPlayerDirection = GameManager.instance.LastPlayerDirection;

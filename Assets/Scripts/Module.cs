@@ -59,10 +59,5 @@ namespace ExplorTheCampus
                 score = credits;
             }
         }
-
-        void OnValidate()
-        {
-            Debug.Log("VKDMOWEC");
-        }
     }
 }
