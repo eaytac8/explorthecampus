@@ -19,6 +19,21 @@ namespace ExplorTheCampus {
         private bool cancelTyping = false;
         public float typeSpeed = 0.1f;
 
+        private GameObject[] inputs;
+        [HideInInspector]
+        public bool hasInputted = true;
+        [HideInInspector]
+        public bool readNextLine = true;
+
+        void Awake()
+        {
+            inputs = GameObject.FindGameObjectsWithTag("Input");
+            foreach (GameObject input in inputs)
+            {
+                input.SetActive(false);
+            }
+        } 
+
         void Start()
         {
             arrow.enabled = false;
@@ -36,7 +51,7 @@ namespace ExplorTheCampus {
         void Update()
         {
 
-            if (!isActive)
+            if (!isActive || !hasInputted || !readNextLine)
             {
                 return;
             }
@@ -77,11 +92,36 @@ namespace ExplorTheCampus {
 
             while(isTyping && !cancelTyping && currentLetter < textLine.Length - 1)
             {
-                textToPrint.text += textLine[currentLetter];
+                if (textLine[currentLetter] == '[')
+                {
+                    textToPrint.text = "";
+                    break;
+                } else
+                {
+                    textToPrint.text += textLine[currentLetter];
+                }
                 currentLetter++;
                 yield return new WaitForSeconds(typeSpeed);
             }
-            textToPrint.text = textLine;
+            if (textLine.StartsWith("["))
+            {
+                textToPrint.text = "";
+                hasInputted = false;
+                string inputFieldName = textLine.Substring(1, textLine.Length - 3);
+                foreach (GameObject input in inputs)
+                {
+                    Debug.Log(inputFieldName);
+                    if (input.name == inputFieldName)
+                    {
+                        input.SetActive(true);
+                        input.GetComponent<InputField>().Select();
+                    };
+                }
+            } else
+            {
+                textToPrint.text = textLine;
+            }
+            Debug.Log("Goes here");
             isTyping = false;
             cancelTyping = false;
         }

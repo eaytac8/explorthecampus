@@ -1,0 +1,4 @@
+Hello and welcome to the Reutlingen University.
+What's your name?
+[NameInput]
+What a great name.

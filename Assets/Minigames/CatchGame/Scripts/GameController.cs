@@ -89,6 +89,6 @@ public class GameController : MonoBehaviour {
 
     public void LoadScene()
     {
-        StartCoroutine(SceneManager.instance.LoadScene(0));
+        StartCoroutine(SceneManager.instance.LoadMainScene());
     }
 }

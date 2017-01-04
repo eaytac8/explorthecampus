@@ -15,6 +15,7 @@ namespace ExplorTheCampus
         /// </summary>
         void Start()
         {
+            
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Transform playerTransform = player.GetComponent<Transform>();
             Animator playerAnimator = player.GetComponent<Animator>();

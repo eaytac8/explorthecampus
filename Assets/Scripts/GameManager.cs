@@ -16,6 +16,7 @@ namespace ExplorTheCampus {
         private const string SEMESTER = "semester";
 
         public static GameManager instance = null;
+
         public GameObject canvas;
         public GameObject control;
         public PlayerController playerController;
@@ -42,6 +43,7 @@ namespace ExplorTheCampus {
         [System.Serializable]
         private class GameDataContainer {
 
+            public string userName;
             public int semester = 1; //Level of the user
             public int amountRetriedModules = 0;
             public int attempts = 5; //Lifes of the user
@@ -76,7 +78,6 @@ namespace ExplorTheCampus {
             {
                 gameData.semester++;
                 gameData.moduleIdsAlreadyPassed.Clear();
-                SaveGameData();
                 Debug.Log("next level");
             }
         }
@@ -122,11 +123,12 @@ namespace ExplorTheCampus {
         public void LoadRandomMinigame()
         {
             List<int> moduelIdsNotPlayed = new List<int>();
-            for (int i = 1; i <= amountMinigames; i++)
+            Debug.Log("Amount min0 " + amountMinigames);
+            for (int i = 0; i < amountMinigames; i++)
             {
                 if (!gameData.moduleIdsAlreadyPassed.Contains(i))
                 {
-                    moduelIdsNotPlayed.Add(i);
+                    moduelIdsNotPlayed.Add(i + 3);
                 }
             }
             int gameId = moduelIdsNotPlayed[Random.Range(0, moduelIdsNotPlayed.Count)];
@@ -143,7 +145,14 @@ namespace ExplorTheCampus {
         
         public void StartGame()
         {
-            StartCoroutine(SceneManager.instance.LoadScene(1));
+            int firstScene = 2;
+            if (gameData.userName == null)
+            {
+                firstScene = 1;
+            }
+            StartCoroutine(SceneManager.instance.LoadScene(firstScene));
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            ShowControl(true);
         }
 
         /// <summary>
@@ -154,6 +163,20 @@ namespace ExplorTheCampus {
             get
             {
                 return gameData.semester;
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                return gameData.userName;
+            }
+
+            set
+            {
+                Debug.Log("USERNAME: " + value);
+                gameData.userName = value;
             }
         }
 
@@ -219,7 +242,7 @@ namespace ExplorTheCampus {
 
         private void Initialize()
         {
-            amountMinigames = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 1;
+            amountMinigames = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 3;
             semesterModuleMapping = new Dictionary<string, int>();
             lastPlayerDirection = new float[2];
 
@@ -234,6 +257,7 @@ namespace ExplorTheCampus {
         void Awake() {
 
             Initialize();
+            ShowControl(false);
 
             if (instance == null) {
                 instance = this;
@@ -255,12 +279,15 @@ namespace ExplorTheCampus {
 
         void OnApplicationQuit()
         {
-            SaveGameData();
+            if (SettingsManager.instance.GetSaveOnQuit()) {
+                SaveGameData();
+            }
         }
 
         public void AllowPlayerMovement(bool allow) 
         {
-            ((PlayerController) GameObject.Find("Player").GetComponent("PlayerController")).AllowedToMove = allow;    
+            ((PlayerController) GameObject.Find("Player").GetComponent("PlayerController")).AllowedToMove = allow;
+            control.transform.GetChild(0).gameObject.SetActive(allow);
         }
 
         public void PauseGame(bool pause)
@@ -281,7 +308,7 @@ namespace ExplorTheCampus {
         /// </summary>
         public void LoadPersistedGameData()
         {
-              
+            
             GameDataContainer persistedGameData = (GameDataContainer) PersistenceService.Load("gameData");
             if (persistedGameData != null)
             {
@@ -317,7 +344,9 @@ namespace ExplorTheCampus {
         /// </summary>
         public void ResetGame()
         {
-
+            gameData = new GameDataContainer();
+            SaveGameData();
+            SceneManager.instance.LoadScene(0);
         }
 
         public void QuitGame()

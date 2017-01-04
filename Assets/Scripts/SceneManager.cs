@@ -46,16 +46,14 @@ namespace ExplorTheCampus
 
             float fadeTime = screenFader.BeginFade(1);
             yield return new WaitForSeconds(fadeTime);
-            if (currentScene == "Campus")
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(buildIndex);
-            }
-            else
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Campus");
-                GameManager.instance.ShowControl(true);
-            }
+            UnityEngine.SceneManagement.SceneManager.LoadScene(buildIndex);
         }
+
+        public IEnumerator LoadMainScene()
+        {
+            yield return LoadScene(2);
+            GameManager.instance.ShowControl(true);
+        } 
 
         public int GetSceneCount()
         {

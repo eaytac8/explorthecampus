@@ -23,6 +23,7 @@ namespace ExplorTheCampus
 
         void Update()
         {
+            ratio = 0.5f / tileScaleFactor;
             cam.orthographicSize = (Screen.height * 0.01f) * ratio;
         }
     }
