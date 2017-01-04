@@ -51,5 +51,11 @@ namespace ExplorTheCampus
             PlayerPrefs.SetInt("saveOnQuit", toggle.isOn == true ? 1 : 0);
         }
 
+        public void OpenSettings(bool open)
+        {
+            Debug.Log(open);
+            gameObject.transform.GetChild(0).gameObject.SetActive(open);
+        }
+
     }
 }
