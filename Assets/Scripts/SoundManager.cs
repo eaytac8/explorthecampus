@@ -25,6 +25,9 @@ namespace ExplorTheCampus
 
             //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
             DontDestroyOnLoad(gameObject);
+
+            //efxSource.volume = SettingsManager.instance.GetEffectsVolume();
+            //musicSource.volume = SettingsManager.instance.GetBackgroundMusicVolume();
         }
 
         public void PlayMultiple(AudioClip clip)
@@ -32,6 +35,8 @@ namespace ExplorTheCampus
             musicSource.clip = clip;
             musicSource.Play();
         }
+
+
 
         //Used to play single sound clips.
         public void PlaySingle(AudioClip clip)

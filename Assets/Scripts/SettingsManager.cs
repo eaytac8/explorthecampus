@@ -64,6 +64,7 @@ namespace ExplorTheCampus
             if (backgroundMusicVolumeSlider)
             {
                 PlayerPrefs.SetFloat(BACKGROUND_MUSIC_VOLUME, backgroundMusicVolumeSlider.value);
+                SoundManager.instance.musicSource.volume = backgroundMusicVolumeSlider.value;
             }
         }
 
@@ -71,6 +72,7 @@ namespace ExplorTheCampus
         {   if (effectsSlider)
             {
                 PlayerPrefs.SetFloat(EFFECTS_VOLUME, effectsSlider.value);
+                SoundManager.instance.efxSource.volume = effectsSlider.value;
             }
         }
 

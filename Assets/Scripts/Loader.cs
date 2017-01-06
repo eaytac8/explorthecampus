@@ -17,13 +17,13 @@ namespace ExplorTheCampus
             {
                 Instantiate(sceneManager);
             }
-            if (SettingsManager.instance == null)
-            {
-                Instantiate(settingsManager);
-            }
             if (SoundManager.instance == null)
             {
                 Instantiate(soundManager);
+            }
+            if (SettingsManager.instance == null)
+            {
+                Instantiate(settingsManager);
             }
             if (GameManager.instance == null)
             {
