@@ -11,13 +11,13 @@ namespace ExplorTheCampus {
         public Text textToPrint;
         public Image arrow;
         public string[] textLines;
+        public int printedTexts = 0;
 
         public int startFromLine;
         public int endAtLine;
         public bool isActive;
         private bool isTyping = false;
         private bool cancelTyping = false;
-        public float typeSpeed = 0.1f;
 
         private GameObject[] inputs;
         [HideInInspector]
@@ -101,7 +101,7 @@ namespace ExplorTheCampus {
                     textToPrint.text += textLine[currentLetter];
                 }
                 currentLetter++;
-                yield return new WaitForSeconds(typeSpeed);
+                yield return new WaitForSeconds(SettingsManager.instance.GetTextSpeed());
             }
             if (textLine.StartsWith("["))
             {
@@ -121,7 +121,6 @@ namespace ExplorTheCampus {
             {
                 textToPrint.text = textLine;
             }
-            Debug.Log("Goes here");
             isTyping = false;
             cancelTyping = false;
         }
@@ -137,6 +136,7 @@ namespace ExplorTheCampus {
         {
             textBox.SetActive(true);
             isActive = true;
+            printedTexts++;
             if (!isTyping)
             {
                 StartCoroutine(TextScroll(textLines[startFromLine]));
@@ -158,6 +158,11 @@ namespace ExplorTheCampus {
                     endAtLine = textLines.Length - 1;
                 }
             }
+        }
+
+        public bool IsReading()
+        {
+            return startFromLine <= endAtLine;
         }
     }
 }

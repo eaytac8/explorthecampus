@@ -20,6 +20,9 @@ namespace ExplorTheCampus
         public bool allowDiagonalMove = false;
         private bool allowedToMove = true;
 
+        public AudioClip moveSound1;
+        public AudioClip moveSound2;
+
         public bool AllowedToMove
         {
             get
@@ -81,6 +84,7 @@ namespace ExplorTheCampus
             if (movementVector != Vector2.zero)
             {
                 animator.SetBool("is_walking", true);
+                SoundManager.instance.RandomizeSfx(moveSound1, moveSound2);
                 animator.SetFloat("input_x", movementVector.x);
                 animator.SetFloat("input_y", movementVector.y);
             }

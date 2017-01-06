@@ -14,6 +14,7 @@ namespace ExplorTheCampus {
 
         void Update() {
             if (target) {
+                Debug.Log("WHUT");
                 transform.position = Vector3.Lerp(transform.position, target.position, cameraSpeed) + new Vector3(0, 0, -10);
             }
         }

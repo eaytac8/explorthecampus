@@ -6,7 +6,6 @@ namespace ExplorTheCampus {
 
     public class PauseMenu : MonoBehaviour
     {
-
         public Text scoreText;
 
         void OnEnable()
@@ -15,13 +14,6 @@ namespace ExplorTheCampus {
             scoreText.text = GameManager.instance.Credits 
                 + "\n" + GameManager.instance.Semester + "/" + GameManager.instance.maxAmountSemester
                 + "\n" + GameManager.instance.Attempts;
-            GameManager.instance.AllowPlayerMovement(false);
-        }
-
-        void OnDisable()
-        {
-            GameManager.instance.ShowControl(true);
-            GameManager.instance.AllowPlayerMovement(true);
         }
     }
 

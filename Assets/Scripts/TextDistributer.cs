@@ -42,6 +42,7 @@ namespace ExplorTheCampus {
 
         void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log("Collision");
             if (other.tag == "Player")
             {
                 if (startOnButtonPress)
@@ -70,7 +71,7 @@ namespace ExplorTheCampus {
             }
         }
 
-        private void startPrintingText()
+        public void startPrintingText()
         {
             textBoxManager.startFromLine = startFromLine;
             textBoxManager.endAtLine = endAtLine;

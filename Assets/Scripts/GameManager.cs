@@ -17,6 +17,9 @@ namespace ExplorTheCampus {
 
         public static GameManager instance = null;
 
+        public AudioClip gameOverSound;
+        public AudioClip winSound;
+
         public GameObject canvas;
         public GameObject control;
         public PlayerController playerController;
@@ -67,8 +70,10 @@ namespace ExplorTheCampus {
             if (!record.Missed)
             {
                 gameData.moduleIdsAlreadyPassed.Add(record.GameId);
+                SoundManager.instance.PlaySingle(winSound);
             } else {
                 gameData.attempts--;
+                SoundManager.instance.PlaySingle(gameOverSound);
             }
             if (CheckExma())
             {
@@ -274,7 +279,11 @@ namespace ExplorTheCampus {
             {
                 PauseGame(true);
             }
-            
+
+            if (CnInputManager.GetButtonUp("Fire3"))
+            {
+                SettingsManager.instance.OpenSettings(true);
+            }
         }
 
         void OnApplicationQuit()
@@ -300,6 +309,10 @@ namespace ExplorTheCampus {
             if (control)
             {
                 control.SetActive(enable);
+                if (enable)
+                {
+                    control.transform.GetChild(0).gameObject.SetActive(true);
+                }
             }
         }
 
@@ -344,6 +357,7 @@ namespace ExplorTheCampus {
         /// </summary>
         public void ResetGame()
         {
+            PlayerPrefs.DeleteAll();
             gameData = new GameDataContainer();
             SaveGameData();
             SceneManager.instance.LoadScene(0);

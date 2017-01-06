@@ -1,4 +1,21 @@
-Hello and welcome to the Reutlingen University.
-What's your name?
+Hello  and welcome  to  the  Reutlingen  University.
+What's  your  name?
 [NameInput]
 What a great name.
+
+This is the campus of the Reutlingen University.
+As you can see, it is not that small.
+
+By dragging the joystick on the left side you can walk on the campus.
+Feel free and try it out!
+
+Great!
+On the left upper corner you can see your semester which is currently 1.
+To win the game you should reach semester 7.
+
+On the right upper corner you can see your credits.
+You can get credits if you play minigames by entering a building or talking with profs.
+
+Finally, this is you.
+By clicking on your player you can open the statistics and edit the settings as well as saving the game.
+Lets go!

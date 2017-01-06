@@ -25,7 +25,8 @@ namespace ExplorTheCampus
             if (SceneManager.instance.lastScene != null 
                 && SceneManager.instance.lastScene != "" 
                 && SceneManager.instance.lastScene != "Campus" 
-                && SceneManager.instance.lastScene != "Start")
+                && SceneManager.instance.lastScene != "Start"
+                 && SceneManager.instance.lastScene != "Introduction")
             {
                 Vector3 lastPlayerPosition = GameManager.instance.LastPlayerPosition;
                 float[] lastPlayerDirection = GameManager.instance.LastPlayerDirection;
